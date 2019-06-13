@@ -1,17 +1,31 @@
 import React from 'react';
+// import FriendContainer from './FriendContainer';
+import UpdateForm from './FriendsList'
 
 
-const Friend = (props) =>{
-    return(
-        <div className="friend-container">
+export default class Friend extends React.Component{
+    
+    constructor(props){
+        super(props)
 
-            <div><button onClick={(e) => props.deleteFriend(e, props.friend.id)} >x</button></div>
-            <div>{props.friend.name}</div>
-            <div>{props.friend.age}</div>
-            <div>{props.friend.email}</div>
-        </div>
-    )
+        this.state = {
+            friend:[]
+        }
+    }
+    render(){
+
+       // const id = this.props.match.params.id;
+       // console.log(id)
+        //const friend = this.props.friends.find( res => res.id === id)
+        return(
+            <>
+                 {/* <div>{friend.name}</div>
+            <div>{friend.age}</div>
+            <div>{friend.email}</div> */}
+    
+                <UpdateForm />
+    
+            </>
+        )
+    }
 }
-
-
-export default Friend

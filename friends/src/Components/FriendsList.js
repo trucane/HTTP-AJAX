@@ -1,18 +1,27 @@
 import React from 'react';
-import Friend from './Friend';
-import Form from './Form'
+import FriendContainer from './FriendContainer';
+
+// import Form from './Form'
 
 
 
 
 
 const FriendsList = (props) =>{
+
+    console.log(props)
+
     return(
         <>
             {props.friends.map( friend =>(
-                <Friend key={friend.id} friend={friend} deleteFriend={props.deleteFriend}/>
+                <FriendContainer
+                    key={friend.id} 
+                    friend={friend} 
+                    deleteFriend={props.deleteFriend}
+                    updateFriend={props.updateFriend}
+                />
             ))}
-            <Form addFriend={props.addFriend}/>
+            {/* <Form addFriend={props.addFriend}/> */}
         </>
     )
 }
