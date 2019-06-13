@@ -33,7 +33,8 @@ export default class App extends Component {
       .catch(err => console.log(err))
   }
 
-  deleteFriend = (id) =>{
+  deleteFriend = (e,id) =>{
+    e.preventDefault();
     const url = `http://localhost:5000/friends/${id}`;
     axios.delete(url)
       .then(response =>{
@@ -49,8 +50,17 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Route exact path='/' render={props =>  <FriendsList {...props}  friends={friends} addFriend={this.addFriend}/>} />
-         
+          <Route 
+            exact path='/' 
+            render={props =>  
+              <FriendsList 
+                {...props}  
+                friends={friends} 
+                addFriend={this.addFriend}
+                deleteFriend={this.deleteFriend}
+              />
+            } 
+          />
         </header>
       </div>
     );

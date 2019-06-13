@@ -10,9 +10,9 @@ const FriendsList = (props) =>{
     return(
         <>
             {props.friends.map( friend =>(
-                <Friend key={friend.id} friend={friend} />
+                <Friend key={friend.id} friend={friend} deleteFriend={props.deleteFriend}/>
             ))}
-            <Form addItem={props.addFriend}/>
+            <Form addFriend={props.addFriend}/>
         </>
     )
 }
