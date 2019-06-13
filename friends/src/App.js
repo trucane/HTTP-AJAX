@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import FriendsList from './Components/FriendsList';
 import axios from 'axios';
 import './App.css';
+import {Route} from 'react-router-dom';
 
 export default class App extends Component {
 
@@ -14,24 +15,42 @@ export default class App extends Component {
 
   componentDidMount (){
     axios.get('http://localhost:5000/friends')
-    .then(response => {
-      this.setState( () => ({friends: response.data}));
-    })
+    .then(response => 
+      this.setState({friends: response.data})
+    )
     .catch(error =>{
       console.error('Server Error', error);
     })
   }
 
+  addFriend = (data) =>{
+    const url = 'http://localhost:5000/friends';
+    axios.post(url, data)
+      .then(response =>{
+         this.setState({friends:response.data});
+         this.props.history.push('/')
+      })
+      .catch(err => console.log(err))
+  }
+
+  deleteFriend = (id) =>{
+    const url = `http://localhost:5000/friends/${id}`;
+    axios.delete(url)
+      .then(response =>{
+        this.setState({friends:response.data});
+        this.props.history.push('/')
+      })
+      .catch(err => console.log(err))
+  }
+
   render(){
-    console.log(this.state.friends)
+    const friends = this.state.friends
 
     return (
       <div className="App">
         <header className="App-header">
-          <FriendsList  friends={this.state.friends} />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
+          <Route exact path='/' render={props =>  <FriendsList {...props}  friends={friends} addFriend={this.addFriend}/>} />
+         
         </header>
       </div>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import Friend from './Friend';
+import Form from './Form'
 
 
 
@@ -11,6 +12,7 @@ const FriendsList = (props) =>{
             {props.friends.map( friend =>(
                 <Friend key={friend.id} friend={friend} />
             ))}
+            <Form addItem={props.addFriend}/>
         </>
     )
 }
