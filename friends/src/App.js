@@ -30,7 +30,7 @@ export default class App extends Component {
     axios.post(url, data)
       .then(response =>{
          this.setState({friends:response.data});
-         this.props.history.push('/')
+         this.props.history.push('/friends')
       })
       .catch(err => console.log(err))
   }
@@ -41,18 +41,20 @@ export default class App extends Component {
     axios.delete(url)
       .then(response =>{
         this.setState({friends:response.data});
-        this.props.history.push('/')
+        this.props.history.push(`/friends`)
       })
       .catch(err => console.log(err))
   }
 
-  updateFriend = (e, id) =>{
-    const idd = 2;
-    e.preventDefault();
-    const url = `http://localhost:5000/friends/${idd}`;
-    axios.put(url)
+  updateFriend = (id, data) =>{
+
+    console.log(id)
+    console.log(data)
+    const url = `http://localhost:5000/friends/${id}`;
+    axios.put(url, data)
       .then( response =>{
-        console.log(response)
+        this.setState({friends:response.data});
+        this.props.history.push(`/friends/${id}`)
       })
       .catch(err => console.log(err))
   }
@@ -63,7 +65,11 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Route exact path="/friend/:id" render={props => <Friend {...props}  friends={friends} />} />
+          <Route exact path="/friends/:id" render={props => <Friend {...props}  
+          friends={friends}
+          updateFriend={this.updateFriend}
+          deleteFriend={this.deleteFriend}
+          />} />
 
           <Route exact path="/friends" render={props =>  <FriendsList {...props}  friends={friends} 
                 addFriend={this.addFriend}

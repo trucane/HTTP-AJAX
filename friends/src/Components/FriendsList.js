@@ -1,7 +1,8 @@
 import React from 'react';
 import FriendContainer from './FriendContainer';
+import NavBar from './Navigation/NavBar';
 
-// import Form from './Form'
+ import Form from './Form'
 
 
 
@@ -9,10 +10,9 @@ import FriendContainer from './FriendContainer';
 
 const FriendsList = (props) =>{
 
-    console.log(props)
-
     return(
         <>
+        <NavBar />
             {props.friends.map( friend =>(
                 <FriendContainer
                     key={friend.id} 
@@ -21,7 +21,7 @@ const FriendsList = (props) =>{
                     updateFriend={props.updateFriend}
                 />
             ))}
-            {/* <Form addFriend={props.addFriend}/> */}
+            <Form addFriend={props.addFriend}/>
         </>
     )
 }
